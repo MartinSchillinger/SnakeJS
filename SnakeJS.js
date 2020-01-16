@@ -6,9 +6,12 @@ class SnakeJS {
         this.canvas = canvas
         this.ctx = canvas.getContext("2d")
         this.tileSize = 0
-        this.resizeCanvas()
-        this.snake = this.spawnSnake()
-        this.init()        
+        this.snake = null
+        this.assets = []
+        this.init()
+        this.drawInterval = 0
+        this.updateInterval = 0
+        this.snakeDirection = 1
     }
 
     static factory(boardSizeX, boardSizeY, canvas){
@@ -19,24 +22,32 @@ class SnakeJS {
     }
     
     init() {        
-        var that = this;
-        window.addEventListener('resize', function() {
-            return that.resizeCanvas()
-        })       
+        window.addEventListener('resize', () => {
+            this.resizeCanvas()
+        })
+        this.snake = this.spawnSnake()
+        this.resizeCanvas()
+        this.drawInterval = setInterval(() => {
+            this.draw()
+        }, 16)
+        this.updateInterval = setInterval(() => {
+            this.update()
+        }, 100) 
+    }
+
+    draw(){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.snake.draw()
+    }
+
+    update(){
+        this.snake.move(this.snakeDirection)
     }
 
     spawnSnake(){
         let snakeX = Math.floor(this.boardSizeX / 2)
         let snakeY = Math.floor(this.boardSizeY / 2)
         return new Snake(snakeX, snakeY, this)        
-    }
-
-    run() {
-
-    }
-
-    calculateTileSize(){
-    
     }
 
     resizeCanvas() {
@@ -51,10 +62,8 @@ class SnakeJS {
         this.canvas.style.marginLeft = newCanvasWidth / 2 * (-1) + 'px'
         this.tileSize = newCanvasHeight / this.boardSizeY
         console.log(`New Canvas Size: ${newCanvasWidth}px x ${newCanvasHeight}px - Tilesize: ${this.tileSize}px x ${this.tileSize}px`)
-        this.spawnSnake()
-    }
-
-    
+        this.draw()
+    }    
 
 }
 

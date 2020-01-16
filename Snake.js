@@ -3,31 +3,42 @@ class Snake {
         this.game = game
         this.posX = posX
         this.posY = posY
-        this.currentDirection = null;
-        this.tiles = []
+        this.currentDirection = 1;
+        this.bodyParts = null
         this.spawn()
-    }    
+    }
+    
+    get ctx(){
+        return this.game.ctx
+    }
 
-    setDirection(newDirection){
-        this.currentDirection = newDirection
+    get tileSize(){
+        return this.game.tileSize
+    }
+
+    move(direction){
+        if(direction === 1){
+            this.posY -= 1            
+        } 
+        this.bodyParts.move(this.posX, this.posY)
     }
 
     draw() {
-        this.tiles.forEach(e => e.draw())
+        this.bodyParts.draw()
     }
 
-    spawn() {
-        this.tiles.push(new BodyPart(this.posX, this.posY, this))
-        this.tiles.push(new BodyPart(this.posX, this.posY +1, this))
-        this.tiles.push(new BodyPart(this.posX, this.posY +2, this))
+    spawn() {        
+        this.bodyParts = new BodyPart(this.posX, this.posY +5, this)
+        this.bodyParts.move(this.posX, this.posY + 4)
+        this.bodyParts.addBodyPart()
+        this.bodyParts.move(this.posX, this.posY + 3)
+        this.bodyParts.addBodyPart()
+        this.bodyParts.move(this.posX, this.posY + 2)
+        this.bodyParts.addBodyPart()
+        this.bodyParts.move(this.posX, this.posY + 1)
+        this.bodyParts.addBodyPart()
+        this.bodyParts.move(this.posX, this.posY)
         this.draw()
     }
 
-}
-
-const Direction = {
-    up: 1,
-    right: 2,
-    down: 3,
-    left: 4
 }
