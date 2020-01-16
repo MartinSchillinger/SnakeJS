@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Bodypart.js" defer></script>
+    <script src="Snake.js" defer></script>
+    <script src="SnakeJS.js" defer></script>
+    <style>
+        #game {
+            position: fixed;
+            left: 50%;
+            margin-left: -400px;
+            width: 800px;
+            height: 600px;
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Snake</h1>
+    <canvas id="game"></canvas>
+    <script>
+        function init(){
+            let game = null
+            try{
+                game = SnakeJS.factory(55, 35, document.getElementById('game'))
+            }catch(e){
+               console.log(e.name + ": " + e.message) 
+            }            
+        }
+        document.addEventListener("DOMContentLoaded", init)
+    </script>
+</body>
+</html>
