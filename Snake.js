@@ -22,10 +22,15 @@ class Snake {
     return this.game.tileSize;
   }
 
+  getHeadPosition(){
+    return this.bodyParts.getHeadPosition();
+  }
+
   getVector() {
     return this.bodyParts.getVector();
   }
 
+  //TODO: create Semaphor for only 1 direction change per update
   setDirection(direction) {
     if (
       direction === Controls.unused ||
@@ -65,7 +70,7 @@ class Snake {
   }
 
   spawn() {
-    this.bodyParts = new BodyPart(this.x, this.y + 3, this);
+    this.bodyParts = new Head(this.x, this.y + 3, this);
     this.bodyParts.move(this.x, this.y + 2);
     this.bodyParts.addBodyPart();
     this.bodyParts.move(this.x, this.y + 1);

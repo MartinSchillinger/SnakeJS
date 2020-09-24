@@ -1,5 +1,6 @@
 class SnakeJS {
   constructor(boardSizeX, boardSizeY, canvas) {
+    this.state = State.stopped;
     this.boardSizeX = boardSizeX;
     this.boardSizeY = boardSizeY;
     this.canvas = canvas;
@@ -11,8 +12,24 @@ class SnakeJS {
     this.drawInterval = 0;
     this.updateInterval = 0;
     this.keyConv = new KeyConverter();
-    this.cDetector = new CollisionDetector();
+    this.cDetector = new CollisionDetector(this);
     this.map = new GameMap(this);
+  }
+
+  start() {
+    this.drawInterval = setInterval(() => {
+      this.draw();
+    }, 16);
+    this.updateInterval = setInterval(() => {
+      this.update();
+    }, 100);
+    this.state = State.running;
+  }
+
+  pause() {
+    clearInterval(this.drawInterval);
+    clearInterval(this.updateInterval);
+    this.state = State.stopped;
   }
 
   static factory(boardSizeX, boardSizeY, canvas) {
@@ -32,12 +49,6 @@ class SnakeJS {
     this.map = new GameMap(this);
     this.snake = Snake.factory(this);
     this.resizeCanvas();
-    this.drawInterval = setInterval(() => {
-      this.draw();
-    }, 16);
-    this.updateInterval = setInterval(() => {
-      this.update();
-    }, 100);
   }
 
   draw() {
@@ -53,7 +64,18 @@ class SnakeJS {
 
   update() {
     this.snake.move();
-    this.cDetector.detect();
+    let hit = this.cDetector.detect(this.snake.getHeadPosition());
+    if(!hit){
+      return;
+    }
+
+    if(hit.type === "map/food"){
+      this.snake.bodyParts.addBodyPart();
+      this.map.spawnFood();
+      return;
+    }
+
+    this.pause();
   }
 
   resizeCanvas() {
@@ -68,7 +90,7 @@ class SnakeJS {
     this.canvas.style.marginLeft = (newCanvasWidth / 2) * -1 + "px";
     this.tileSize = newCanvasHeight / this.boardSizeY;
     console.log(
-      `New Canvas Size: ${newCanvasWidth}px x ${newCanvasHeight}px - Tilesize: ${this.tileSize}px x ${this.tileSize}px`
+      `New Canvas Size: ${newCanvasWidth}px x ${newCanvasHeight}px - Tilesize: ${this.tileSize}px x ${this.tileSize}px - Mapsize: ${this.boardSizeX}, ${this.boardSizeY}`
     );
     this.draw();
   }
@@ -86,3 +108,8 @@ const Controls = {
   left: 4,
   unused: 5
 };
+
+const State = {
+  running: 1,
+  stopped: 2  
+}

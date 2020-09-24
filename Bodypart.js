@@ -6,12 +6,13 @@ class BodyPart {
     this.lastX = 0;
     this.lastY = 0;
     this.nextBodyPart = null;
+    this.color = "black"
   }
 
   draw(recursive = true) {
     let x = this.x * this.tileSize;
     let y = this.y * this.tileSize;
-    this.ctx.fillStyle = "black";
+    this.ctx.fillStyle = this.color;
     this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
     if (recursive && this.nextBodyPart !== null) {
       this.nextBodyPart.draw();
@@ -19,11 +20,11 @@ class BodyPart {
   }
 
   getVector() {
-    let coords = { x: this.x, y: this.y, type: "snake" };
+    let coords = new Coordinates(this.x, this.y, "snake/body");
     if (this.nextBodyPart === null) {
       return [coords];
     }
-    return this.nextBodyPart.getVector().push(coords);
+    return [...this.nextBodyPart.getVector(), coords];
   }
 
   get ctx() {
@@ -46,8 +47,23 @@ class BodyPart {
   addBodyPart() {
     if (this.nextBodyPart === null) {
       this.nextBodyPart = new BodyPart(this.x, this.y, this);
-    } else {
-      this.nextBodyPart.addBodyPart();
+      return;
     }
+    this.nextBodyPart.addBodyPart();    
+  }
+}
+
+class Head extends BodyPart {
+  constructor(posX, posY, parent) {
+    super(posX, posY, parent);
+    this.color = "red";
+  }
+
+  getHeadPosition(){
+    return new Coordinates(this.x, this.y, "snake/head");
+  }
+
+  getVector() {
+    return [...this.nextBodyPart.getVector()];
   }
 }

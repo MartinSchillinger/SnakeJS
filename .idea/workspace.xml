@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7230d186-9b69-44cd-8378-99c1e29f1e6f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Bodypart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Bodypart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollisionDetector.js" beforeDir="false" afterPath="$PROJECT_DIR$/CollisionDetector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/GameMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeJS.js" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeJS.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1hxg0QzcNjPPp9RwjS3KiSJ2a5I" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7230d186-9b69-44cd-8378-99c1e29f1e6f" name="Default Changelist" comment="" />
+      <created>1600957933965</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600957933965</updated>
+      <workItem from="1600957935007" duration="55000" />
+      <workItem from="1600957999262" duration="40000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -24,16 +24,17 @@
   <body>
     <h1>Snake</h1>
     <canvas id="game"></canvas>
+    <button onclick="game.start()">Start</button>
+    <button onclick="game.pause()">Stop</button>
     <script>
-      function init() {
-        let game = null;
+      let game = null;
+      document.addEventListener("DOMContentLoaded", () => {
         try {
-          game = SnakeJS.factory(55, 35, document.getElementById("game"));
+          game = SnakeJS.factory(35, 25, document.getElementById("game"));
         } catch (e) {
           console.log(e.name + ": " + e.message);
         }
-      }
-      document.addEventListener("DOMContentLoaded", init);
+      });
     </script>
   </body>
 </html>
