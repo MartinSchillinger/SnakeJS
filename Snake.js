@@ -3,7 +3,7 @@ class Snake {
     this.game = game;
     this.x = posX;
     this.y = posY;
-    this.direction = 1;
+    this.nextDirection = Controls.up;
     this.bodyParts = null;
     this.spawn();
   }
@@ -34,18 +34,18 @@ class Snake {
   setDirection(direction) {
     if (
       direction === Controls.unused ||
-      (direction === Controls.up && this.direction === Controls.down) ||
-      (direction === Controls.right && this.direction === Controls.left) ||
-      (direction === Controls.down && this.direction === Controls.up) ||
-      (direction === Controls.left && this.direction === Controls.right)
+      (direction === Controls.up && this.lastMovementDirection === Controls.down) ||
+      (direction === Controls.right && this.lastMovementDirection === Controls.left) ||
+      (direction === Controls.down && this.lastMovementDirection === Controls.up) ||
+      (direction === Controls.left && this.lastMovementDirection === Controls.right)
     ) {
       return;
     }
-    this.direction = direction;
+    this.nextDirection = direction;
   }
 
   move() {
-    switch (this.direction) {
+    switch (this.nextDirection) {
       case Controls.up:
         this.y -= 1;
         break;
@@ -63,6 +63,7 @@ class Snake {
         break;
     }
     this.bodyParts.move(this.x, this.y);
+    this.lastMovementDirection = this.nextDirection;
   }
 
   draw() {

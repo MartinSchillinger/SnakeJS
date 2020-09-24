@@ -13,6 +13,8 @@ class KeyConverter {
       case 37:
       case 65:
         return Controls.left;
+      case 32:
+        return Controls.togglePause;
       default:
         return Controls.unused;
     }

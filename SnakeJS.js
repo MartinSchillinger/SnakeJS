@@ -26,6 +26,12 @@ class SnakeJS {
     this.state = State.running;
   }
 
+  changeGameState(newState){
+    switch(newstate){
+      //TODO
+    }
+  }
+
   pause() {
     clearInterval(this.drawInterval);
     clearInterval(this.updateInterval);
@@ -59,7 +65,35 @@ class SnakeJS {
 
   keyDown(event) {
     let key = this.keyConv.convertKeyToAction(event);
-    this.snake.setDirection(key);
+    let snakeDirections = [
+      Controls.up,
+      Controls.down,
+      Controls.left,
+      Controls.right
+    ];
+
+    if(snakeDirections.includes(key)) {
+      this.snake.setDirection(key);
+      return;
+    }
+    
+    if(key === Controls.togglePause){
+      switch(this.state){
+        case State.running:
+          this.state = State.paused;
+          break;
+        case State.paused:
+          this.state = State.running;
+          break;
+        case State.won:
+        case State.lost:
+          this.resetGame();
+        break;
+        default:
+          return;
+      }
+    }
+
   }
 
   update() {
@@ -74,6 +108,7 @@ class SnakeJS {
       this.map.spawnFood();
       return;
     }
+
 
     this.pause();
   }
@@ -106,10 +141,14 @@ const Controls = {
   right: 2,
   down: 3,
   left: 4,
-  unused: 5
+  unused: 5,
+  togglePause: 6
 };
 
 const State = {
+  reset: 0,
   running: 1,
-  stopped: 2  
+  paused: 2,
+  won: 3,
+  lost: 4
 }
